@@ -1,0 +1,6 @@
+#{extends 'main.html' /}
+#{set title:'Kokuban 黒板' /}
+
+#{list items:fragments}
+<h1><a href="@{show(_.id)}">${_.title}</a></h1>
+#{/list}

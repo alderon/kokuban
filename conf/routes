@@ -5,6 +5,12 @@
 # Home page
 GET     /                                       Application.index
 
+# Fragments
+GET     /fragments                              Fragments.index
+GET     /fragments/new                          Fragments.new_
+POST    /fragments/create                       Fragments.create
+GET     /fragments/{id}                         Fragments.show
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 

@@ -1,0 +1,36 @@
+body {
+    background-color: #23342f;
+    margin: 0;
+    font-family: arial, serif;
+}
+a {
+    color: #f5ebb4;
+}
+div.navigation {
+    color: #f5ebb4;
+}
+div#container {
+    width: 960px;
+    margin: 0 auto;
+    background-color: #2f463f;
+}
+
+div.content {
+    padding: 10px;
+}
+
+h1 { 
+    font-family: 'Ultra', arial, serif;
+    font-weight: normal;
+    color: #f5ebb4;
+}
+h1 a {
+    color: #f5ebb4;
+    text-decoration: none;
+}
+
+/*
+.syntaxhighlighter {
+    font-size: 0.8em !important;
+}
+*/

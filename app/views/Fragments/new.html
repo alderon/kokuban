@@ -8,9 +8,27 @@
 #{/if}
 
 <form action="@{Fragments.create()}" method="POST">
-    <input type="text" name="title" value="${params.title}" />
-    <br/>
-    <textarea name="content">${params.content}</textarea>
-    <br/>
-    <input type="submit" value="Share!" />
+
+    <p>
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" value="${params.title}" />
+    </p>
+    
+    <p>
+        <label for="content">Content:</label>
+        <textarea name="content" id="content">${params.content}</textarea>
+    </p>
+    
+    <p>
+        <label for="style">Type:</label>
+        #{select 'style', id:'type'}
+            #{list items:styles, as:'style', value:params.style}
+            #{option style._1}${style._2}#{/option}
+            #{/list}
+        #{/select}
+    </p>
+    <p>
+        <input type="submit" value="Share!" />
+    </p>
 </form>
+

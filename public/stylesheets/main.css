@@ -3,7 +3,7 @@ body {
     margin: 0;
     font-family: arial, serif;
 }
-a {
+a, label {
     color: #f5ebb4;
 }
 div.navigation {
@@ -27,6 +27,11 @@ h1 {
 h1 a {
     color: #f5ebb4;
     text-decoration: none;
+}
+
+label {
+    display: inline-block;
+    width: 75px;
 }
 
 /*

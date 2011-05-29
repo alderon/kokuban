@@ -13,14 +13,14 @@ object Fragments extends Controller {
         Template('fragments -> Fragment.find().as(Fragment*))
     }
 
-    def new_ = Template("Fragments/new.html")
+    def new_ = Template("Fragments/new.html", 'styles -> Fragment.STYLES)
     
-    def create(@Required title:String, @Required content:String) = {
+    def create(@Required title:String, @Required content:String, @Required style:String) = {
         if (validation.hasErrors) {
             flash += "error" -> "All fields are required."
             new_
         } else {
-            Fragment.create(Fragment(title, content))
+            Fragment.create(Fragment(title, content, style))
             Redirect("/fragments")
         }
     }

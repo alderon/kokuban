@@ -89,3 +89,18 @@ To quote the Play Scala manual on the subject:
 
 **Choice made**: Let's use Anorm since it's the recommended.
 
+## LINKS ##
+
+Useful links found:
+
+* Play:
+  * http://www.playframework.org/documentation/1.2
+  * http://scala.playframework.org/documentation/scala-0.9/home
+  * http://scala.playframework.org/documentation/scala-0.9/guide1
+  * http://www.playframework.org/documentation/1.2.1/validation
+  * http://scala.playframework.org/documentation/scala-0.9/anorm
+* Scala:
+  * http://programming-scala.labs.oreilly.com/index.html
+  * http://www.artima.com/scalazine/articles/steps.html
+  * http://www.codecommit.com/blog/scala/scala-for-java-refugees-part-3
+

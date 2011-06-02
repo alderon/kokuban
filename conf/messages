@@ -4,7 +4,12 @@
 fragment.share=Share
 fragment.delete=Delete
 fragment.header.share=Share a code fragment
+fragment.deleted=Fragment deleted.
 
 fragment.fields.title=Title
 fragment.fields.content=Content
 fragment.fields.type=Type
+
+fields.all.required=All fields are required.
+
+error.generic=Something went wrong!

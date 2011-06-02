@@ -3,24 +3,25 @@
 #{fixture 'FreshDatabase' /}
 
 #{selenium}
+
     // Open the home page, and check that no error occured
     open('/')
     assertNotTitle('Application error')
     
     // Click the "add fragment" link to see the form
     clickAndWait('link=add a fragment')
-    assertTextPresent(&{'fragment.header.share'})
+    assertTextPresent('&{'fragment.header.share'}')
     
     // Check verification
     clickAndWait('shareFragment')
-    assertTextPresent('All fields are required.')
+    assertTextPresent('&{'fields.all.required'}')
     
     // Check creation of new fragment
     type('title', 'title for Java')
     type('content', 'int x=0;')
     select('style','Java')
     clickAndWait('shareFragment')
-    assertTextNotPresent('All fields are required.')
+    assertTextNotPresent('&{'fields.all.required'}')
     assertTextPresent('title for Java')
     
     // Visit the page
@@ -28,5 +29,9 @@
     assertTextPresent('title for Java')
     assertTextPresent('int x=0;')
     assertAttribute('//code@class','glob:*java*')
+    
+    // Delete the fragment
+    clickAndWait('deleteFragment')
+    assertTextPresent('&{'fragment.deleted'}')
 
 #{/selenium}

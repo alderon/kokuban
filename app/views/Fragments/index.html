@@ -1,6 +1,17 @@
 #{extends 'main.html' /}
 #{set title:'Kokuban 黒板' /}
 
-#{list items:fragments}
-<h1><a href="@{show(_.id)}">${_.title}</a></h1>
-#{/list}
+<p>
+    Welcome to <abbr title="黒板">Kokuban</abbr>!
+</p>
+<p>
+    Feel free to <a href="@{Fragments.new_}">share your code</a> with friends.
+</p>
+
+<div class="index">
+    #{list items:fragments}
+    <div class="fragment">
+        <h1><a href="@{show(_.id)}">${_.title}</a></h1>
+    </div>
+    #{/list}
+</div>

@@ -1,18 +1,73 @@
+html {
+    overflow-y: scroll;
+}
+
 body {
-    background-color: #23342f;
+    background-color: #f3f3f3;
     margin: 0;
-    font-family: arial, serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
-a, label {
-    color: #f5ebb4;
+
+a {
+    text-decoration: none;
+    font-color: #5b2ea0;
+    font-weight: bold;
 }
-div.navigation {
-    color: #f5ebb4;
+
+.rounded {
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
-div#container {
+
+/* ======================================================================== */
+
+div.header {
+    height: 116px;
+    background-color: #000000;
+}
+
+div.header div.logo {
+    background-image: url('/public/images/logo.jpg');
+    height: 116px;
+    width: 214px;
+    float: left;
+}
+
+div.header div.navigation {
+    color: #ffffff;
+}
+
+div.header div.navigation ul {
+    margin: 0;
+    padding-top: 40px;
+    list-style: none;
+    float: right;
+}
+
+div.header div.navigation ul li {
+    float: left;
+    padding: 0px 20px;
+}
+
+div.header div.navigation a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* ======================================================================== */
+
+div.footer {
+    height: 232px;
+    background-color: #000000;
+}
+
+/* ======================================================================== */
+
+div.container {
     width: 960px;
     margin: 0 auto;
-    background-color: #2f463f;
 }
 
 div.content {
@@ -20,27 +75,36 @@ div.content {
 }
 
 h1 { 
-    font-family: 'Ultra', arial, serif;
+    font-family: 'Artifika', arial, serif;
     font-weight: normal;
-    color: #f5ebb4;
+    color: #000000;
+    margin: 0px;
 }
 h1 a {
-    color: #f5ebb4;
+    color: #000000;
     text-decoration: none;
 }
 
+/* ======================================================================== */
 
+div.index div.fragment {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border: 1px solid #aaaaaa;
+    
+    -moz-box-shadow: 0 2px 3px #cccccc;
+    -webkit-box-shadow: 0 2px 3px #cccccc;
+    box-shadow: 0 2px 3px #cccccc;
+}
+
+/* ======================================================================== */
 
 /*
 .syntaxhighlighter {
     font-size: 0.8em !important;
 }
 */
-
-.rounded {
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-}
 
 /* ======================================================================== */
 p.flash {

@@ -5,9 +5,9 @@
         <title>#{get 'title' /}</title>
         <meta charset="utf-8">
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/syntaxhighlighter/shCore.css'}">
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/syntaxhighlighter/shThemeMidnight.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/syntaxhighlighter/shThemeFadeToGrey.css'}">
         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-        <link href='http://fonts.googleapis.com/css?family=Ultra' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Artifika' rel='stylesheet' type='text/css'>
         #{get 'moreStyles' /}
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
         <script src="@{'/public/javascripts/jquery-1.5.2.min.js'}" type="text/javascript" charset="utf-8"></script>
@@ -16,12 +16,21 @@
         #{get 'moreScripts' /}
     </head>
     <body>
-        <div id="container">
-            <div class="content">
+        <div class="header">
+            <div class="container">
+                <div class="logo"></div>
                 <div class="navigation">
-                    <a href="@{Fragments.index}">back</a> &ndash;
-                    <a href="@{Fragments.new_}">add a fragment</a>
+                    <ul>
+                        <li><a href="@{Fragments.index}">&{'navigation.home'}</a></li>
+                        <li><a href="@{Fragments.new_}">&{'navigation.add'}</a></li>
+                    </ul>
                 </div>
+            </div>
+        </div>
+
+        <div class="container">
+            
+            <div class="content">
                 
                 #{if flash.error}
                     <p class="flash rounded error">
@@ -38,6 +47,13 @@
                 #{doLayout /}
             </div>
         </div>
+        
+        <div class="footer">
+            <div class="container">
+        
+            </div>
+        </div>
+        
         <script type="text/javascript">
             $(function() {
                 function path()

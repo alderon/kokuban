@@ -12,9 +12,7 @@ import java.util.{Date}
 
 object Fragments extends Controller {
     
-    def index = {
-        Template('fragments -> Fragment.find().as(Fragment*))
-    }
+    def index = Template('fragments -> Fragment.find().as(Fragment*))
 
     def new_ = Template("Fragments/new.html", 'styles -> Fragment.STYLES)
     

@@ -103,4 +103,5 @@ Useful links found:
   * http://programming-scala.labs.oreilly.com/index.html
   * http://www.artima.com/scalazine/articles/steps.html
   * http://www.codecommit.com/blog/scala/scala-for-java-refugees-part-3
+  * http://www.scala-lang.org/docu/files/ScalaByExample.pdf
 

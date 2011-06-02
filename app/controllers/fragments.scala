@@ -18,11 +18,10 @@ object Fragments extends Controller {
     
     def create(@Required title:String, @Required content:String, @Required style:String) = {
         if (validation.hasErrors) {
-            flash += "error" -> "All fields are required."
+            flash += "error" -> "All fields are required." // TODO move to messages
             new_
         } else {
-            var result = Fragment.create(Fragment(title, content, style))
-            println(result)
+            Fragment.create(Fragment(title, content, style))
             Redirect("/fragments")
         }
     }

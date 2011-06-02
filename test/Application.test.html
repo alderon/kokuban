@@ -1,7 +1,32 @@
 *{ You can use plain selenium command using the selenium tag }*
 
+#{fixture 'FreshDatabase' /}
+
 #{selenium}
     // Open the home page, and check that no error occured
     open('/')
     assertNotTitle('Application error')
+    
+    // Click the "add fragment" link to see the form
+    clickAndWait('link=add a fragment')
+    assertTextPresent(&{'fragment.header.share'})
+    
+    // Check verification
+    clickAndWait('shareFragment')
+    assertTextPresent('All fields are required.')
+    
+    // Check creation of new fragment
+    type('title', 'title for Java')
+    type('content', 'int x=0;')
+    select('style','Java')
+    clickAndWait('shareFragment')
+    assertTextNotPresent('All fields are required.')
+    assertTextPresent('title for Java')
+    
+    // Visit the page
+    clickAndWait('link=title for Java')
+    assertTextPresent('title for Java')
+    assertTextPresent('int x=0;')
+    assertAttribute('//code@class','glob:*java*')
+
 #{/selenium}

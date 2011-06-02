@@ -2,13 +2,18 @@ package models
 
 import play.db.anorm._
 import play.db.anorm.SqlParser._
-import defaults._
-import java.util.{Date}
+import play.data.validation.Annotations._
 import scala.collection.SortedMap
+import defaults._
+
+import java.util.{Date}
 
 case class Fragment(
     id: Pk[Long], 
-    title: String, body: String, style: String, created_at: Date
+    @Required title: String, // Roel's note: doesn't seem to work, untestable?
+    body: String,
+    style: String,
+    created_at: Date
 )
 
 /**
@@ -61,7 +66,10 @@ object Fragment extends Magic[Fragment] {
      * http://programming-scala.labs.oreilly.com/ch06.html
      * http://jackcoughonsoftware.blogspot.com/2009/01/deeper-look-at-apply-method-in-scala.html
      */
-    def apply(title: String, body: String, style: String) = {
+    def apply(@Required title: String, body: String, style: String) = {
+        if (!STYLES.contains(style)) {
+            throw new IllegalArgumentException("Given fragment style not allowed.");
+        }
         new Fragment(NotAssigned, title, body, style, new Date())
     }
 

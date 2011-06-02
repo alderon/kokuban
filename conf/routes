@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /                                       Application.index
+GET     /                                       Fragments.index
 
 # Fragments
 GET     /fragments                              Fragments.index

@@ -22,6 +22,18 @@
                     <a href="@{Fragments.index}">back</a> &ndash;
                     <a href="@{Fragments.new_}">add a fragment</a>
                 </div>
+                
+                #{if flash.error}
+                    <p class="flash rounded error">
+                        ${flash.error}
+                    </p>
+                #{/if}
+
+                #{if flash.info}
+                    <p class="flash rounded info">
+                        ${flash.info}
+                    </p>
+                #{/if}
 
                 #{doLayout /}
             </div>

@@ -1,3 +1,10 @@
 # You can specialize this file for each language.
 # For example, for French create a messages.fr file
 #
+fragment.share=Share
+fragment.delete=Delete
+fragment.header.share=Share a code fragment
+
+fragment.fields.title=Title
+fragment.fields.content=Content
+fragment.fields.type=Type

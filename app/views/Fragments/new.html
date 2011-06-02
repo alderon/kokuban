@@ -1,26 +1,21 @@
 #{extends 'main.html' /}
 #{set title:'Kokuban 黒板 - add code fragment' /}
 
-#{if flash.error}
-    <p style="color:#c00">
-        ${flash.error}
-    </p>
-#{/if}
-
+<h1>&{'fragment.header.share'}</h1>
 <form action="@{Fragments.create()}" method="POST">
 
     <p>
-        <label for="title">Title:</label>
+        <label for="title">&{'fragment.fields.title'}:</label>
         <input type="text" name="title" id="title" value="${params.title}" />
     </p>
     
     <p>
-        <label for="content">Content:</label>
+        <label for="content">&{'fragment.fields.content'}:</label>
         <textarea name="content" id="content">${params.content}</textarea>
     </p>
     
     <p>
-        <label for="style">Type:</label>
+        <label for="style">&{'fragment.fields.type'}:</label>
         #{select 'style', id:'type'}
             #{list items:styles, as:'style', value:params.style}
             #{option style._1}${style._2}#{/option}
@@ -28,7 +23,7 @@
         #{/select}
     </p>
     <p>
-        <input type="submit" value="Share!" />
+        <input type="submit" value="&{'fragment.share'}" />
     </p>
 </form>
 

@@ -5,3 +5,7 @@
 <pre class="brush: ${fragment.style}">
 ${fragment.body}
 </pre>
+
+<form method="post" action="@{Fragments.destroy(fragment.id)}">
+    <input type="submit" value="&{'fragment.delete'}"/>
+</form>

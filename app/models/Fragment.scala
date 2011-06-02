@@ -52,7 +52,7 @@ object Fragment extends Magic[Fragment] {
      * Create a new Fragment.
      *
      * Roel's note: This is using the "apply method" feature in Scala. We can
-     * now call this method with the arguments of the apply method. The
+     * now call this class with the arguments of the apply method. The
      * following statements are equivalent:
      *
      *   Fragment.apply("title", "body")

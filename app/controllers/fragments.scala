@@ -3,6 +3,7 @@ package controllers
 import play._
 import play.mvc._
 import play.data.validation.Annotations._
+import play.db.anorm._ 
 import models._
 
 import java.util.{Date}
@@ -20,13 +21,24 @@ object Fragments extends Controller {
             flash += "error" -> "All fields are required."
             new_
         } else {
-            Fragment.create(Fragment(title, content, style))
+            var result = Fragment.create(Fragment(title, content, style))
+            println(result)
             Redirect("/fragments")
         }
     }
     
     def show(id: Long) = {
-        Template('fragment -> Fragment.find("id={id}").on("id" -> id).as(Fragment*).first)
+        Template('fragment -> Fragment.find("id={id}").on("id" -> id).as(Fragment*).head)
+    }
+    
+    def destroy(id: Long) = {
+        val sql = Fragment.delete("id={id}").on("id" -> id)
+        var result = sql.executeUpdate().fold(
+            e => "Something went wrong!",
+            c => "Fragment deleted."
+        )
+        flash += "info" -> result
+        Redirect("/fragments")
     }
     
 }

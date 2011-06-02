@@ -2,6 +2,7 @@ package models
 
 import play.db.anorm._
 import defaults._
+import java.util.{Date}
 
 case class Tag(
     id: Pk[Long], 

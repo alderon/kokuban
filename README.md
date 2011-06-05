@@ -87,7 +87,8 @@ To quote the Play Scala manual on the subject:
 > probably not the best way, and it should be considered as legacy and
 > deprecated.
 
-**Choice made**: Let's use Anorm since it's the recommended.
+**Choice made**: Let's use Anorm since it's recommended, and the more "Scala"
+thing to do.
 
 ## LINKS ##
 

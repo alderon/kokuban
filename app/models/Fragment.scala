@@ -14,7 +14,13 @@ case class Fragment(
     body: String,
     style: String,
     created_at: Date
-)
+) {
+    var tags = List[Tag]()
+    
+    def addTag(tag: Tag) = {
+        tags = tag :: tags
+    }
+}
 
 /**
  * Roel's note: In Scala an 'object' is a singleton.
@@ -71,6 +77,39 @@ object Fragment extends Magic[Fragment] {
             throw new IllegalArgumentException("Given fragment style not allowed.");
         }
         new Fragment(NotAssigned, title, body, style, new Date())
+    }
+    
+    /**
+     * Add links between Fragments and Tags, it does not delete existing ones.
+     * Note: This only adds links, doesn't delete existing links.
+     */
+    def linkTags(fragment: Fragment) {
+        // Roel's note: Batch insert doesn't seem to work in test..?
+        // var sql = SQL("insert into FragmentTag (fragment_id, tag_id) values( {fragmentId}, {tagId})").asBatch
+        // fragment.tags.foreach( tag => sql = sql.addBatch("fragmentId" -> fragment.id.get.get, "tagId" -> tag.id.get.get))
+        // sql.execute();
+        
+        fragment.tags.foreach( tag =>
+            SQL("insert into FragmentTag (fragment_id, tag_id) values( {fragmentId}, {tagId})")
+            .on("fragmentId" -> fragment.id.get.get, "tagId" -> tag.id.get.get)
+            .execute()
+        )
+    }
+    
+    def findWithTags(fragmentId: Long):Fragment = {
+        val fragment~tags = SQL(
+            """
+            SELECT f.*, t.* FROM Fragment f
+            LEFT OUTER JOIN FragmentTag ft ON ft.fragment_id=f.id
+            LEFT OUTER JOIN Tag t ON t.id = ft.tag_id
+            WHERE f.id = {id}
+            """
+        )
+        .on("id" -> fragmentId)
+        .as(Fragment ~< Fragment.span(Tag*))
+        
+        fragment.tags = tags
+        fragment
     }
 
 }

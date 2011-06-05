@@ -10,4 +10,8 @@ case class Tag(
     created_at: Date
 )
 
-object Tag extends Magic[Tag]
+object Tag extends Magic[Tag] {
+    def apply(name: String) = {
+        new Tag(NotAssigned, name, new Date())
+    }
+}

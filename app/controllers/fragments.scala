@@ -16,18 +16,25 @@ object Fragments extends Controller {
 
     def new_ = Template("Fragments/new.html", 'styles -> Fragment.STYLES)
     
-    def create(@Required title:String, @Required content:String, @Required style:String) = {
+    def create(@Required title:String, @Required content:String, @Required style:String, @Required tags:String) = {
         if (validation.hasErrors) {
             flash += "error" -> Messages.get("fields.all.required")
             new_
         } else {
-            Fragment.create(Fragment(title, content, style))
+            val fragment = Fragment.create(Fragment(title, content, style)).get
+
+            // Assign and save tags:
+            val tagModels = tags.split(' ').toList.map(name => Tag.findOrCreate(name))
+            fragment.tags = tagModels
+            Fragment.linkTags(fragment)
+            
             Redirect("/fragments")
         }
     }
     
     def show(id: Long) = {
-        Template('fragment -> Fragment.find("id={id}").on("id" -> id).as(Fragment*).head)
+        // Template('fragment -> Fragment.find("id={id}").on("id" -> id).as(Fragment*).head)
+        Template('fragment -> Fragment.findWithTags(id))
     }
     
     def destroy(id: Long) = {

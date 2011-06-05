@@ -12,6 +12,7 @@ fragment.deleted=Fragment deleted.
 fragment.fields.title=Title
 fragment.fields.content=Content
 fragment.fields.type=Type
+fragment.fields.tags=Tags
 
 fields.all.required=All fields are required.
 

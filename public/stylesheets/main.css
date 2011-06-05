@@ -108,8 +108,11 @@ div.index div.fragment {
 
 /* ======================================================================== */
 p.flash {
-    padding: 4px;
+    padding: 8px 16px;
     font-weight: bold;
+    -moz-box-shadow: 0 2px 3px #cccccc;
+    -webkit-box-shadow: 0 2px 3px #cccccc;
+    box-shadow: 0 2px 3px #cccccc;
 }
 p.error {
     background-color: #ff0000;
@@ -147,4 +150,14 @@ textarea {
 }
 select {
     border: 1px solid #000000;
+}
+
+span.tag {
+    background-color: #5b2ea0;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 4px;
+}
+span.tag a {
+    color: #ffffff;
 }

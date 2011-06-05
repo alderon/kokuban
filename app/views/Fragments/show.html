@@ -2,6 +2,13 @@
 #{set title:'Kokuban 黒板 - code fragment' /}
 
 <h1>${fragment.title}</h1>
+
+<p class="tags">
+    #{list items:fragment.tags}
+    #{tag tag:_ /}
+    #{/list}
+</p>
+
 <pre class="brush: ${fragment.style}">
 ${fragment.body}
 </pre>

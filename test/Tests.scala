@@ -83,4 +83,16 @@ class BasicTests extends UnitFlatSpec with ShouldMatchers with BeforeAndAfterEac
         var fragmentWithTags = Fragment.findWithTags(fragment.id.get.get)
         fragmentWithTags.tags.length should be (0)
     }
+    
+    it should "find an existing tag by name" in {
+        var existingTag = models.Tag.create(models.Tag("performance")).get
+        var tag = models.Tag.findOrCreate("performance")
+        existingTag.id should be (tag.id)
+    }
+    
+    it should "create a tag if can't be found" in {
+        var tag = models.Tag.findOrCreate("performance")
+        tag should not be (null)
+        tag.id should not be (NotAssigned)
+    }
 }

@@ -90,7 +90,7 @@ object Fragment extends Magic[Fragment] {
         // sql.execute();
         
         fragment.tags.foreach( tag =>
-            SQL("insert into FragmentTag (fragment_id, tag_id) values( {fragmentId}, {tagId})")
+            SQL("INSERT INTO FragmentTag (fragment_id, tag_id, created_at) VALUES( {fragmentId}, {tagId}, NOW())")
             .on("fragmentId" -> fragment.id.get.get, "tagId" -> tag.id.get.get)
             .execute()
         )

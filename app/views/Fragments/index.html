@@ -11,12 +11,12 @@
 <div class="index">
     #{list items:fragments, as:'fragment'}
     <div class="fragment">
-        <h1><a href="@{show(fragment.id)}">${fragment.title}</a></h1>
         <div class="tags">
             #{list items:fragment.tags, as:'tag'}
             #{tag tag:tag /}
             #{/list}
         </div>
+        <h1><a href="@{show(fragment.id)}">${fragment.title}</a></h1>
     </div>
     #{/list}
 </div>

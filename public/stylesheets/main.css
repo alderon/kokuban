@@ -98,6 +98,12 @@ div.index div.fragment {
     box-shadow: 0 2px 3px #cccccc;
 }
 
+div.index div.tags {
+    padding-top: 10px;
+    float: right;
+    text-align: right;
+}
+
 /* ======================================================================== */
 
 /*
@@ -156,7 +162,7 @@ span.tag {
     background-color: #5b2ea0;
     color: #ffffff;
     font-weight: bold;
-    padding: 4px;
+    padding: 4px 8px;
 }
 span.tag a {
     color: #ffffff;

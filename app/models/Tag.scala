@@ -3,6 +3,7 @@ package models
 import play.db.anorm._
 import defaults._
 import java.util.{Date}
+import play.db.anorm.SqlParser._
 
 case class Tag(
     id: Pk[Long], 
@@ -24,5 +25,20 @@ object Tag extends Magic[Tag] {
     
     def all() = {
         Tag.find().as(Tag *)
+    }
+    
+    // Roel's note: explicitly list all Tag fields, needed during testing,
+    // and actually make the GROUP BY statement SQL compliant.
+    def allByCount():List[Tag~Long] = {
+        SQL(
+            """
+            SELECT t.id, t.name, t.created_at, count(ft.fragment_id) as tagcount
+            FROM Tag t
+            JOIN FragmentTag ft ON ft.tag_id = t.id
+            GROUP BY t.id, t.name, t.created_at
+            ORDER BY tagcount DESC
+            """
+        )
+        .as( Tag ~< long("tagcount") * )
     }
 }

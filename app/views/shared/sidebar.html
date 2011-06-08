@@ -1,7 +1,7 @@
 <div class="sidebar box">
-    #{list items:models.Tag.all(), as:'tag'}
+    #{list items:models.Tag.allByCount(), as:'tag'}
     <p>
-    <!-- 25 &times; --> #{tag tag:tag /}
+    ${tag._2} &times; #{tag tag:tag._1 /}
     </p>
     #{/list}
 </div>

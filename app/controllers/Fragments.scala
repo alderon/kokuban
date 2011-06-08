@@ -33,7 +33,6 @@ object Fragments extends Controller {
     }
     
     def show(id: Long) = {
-        // Template('fragment -> Fragment.find("id={id}").on("id" -> id).as(Fragment*).head)
         Template('fragment -> Fragment.findWithTags(id))
     }
     

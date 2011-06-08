@@ -12,6 +12,10 @@ POST    /fragments/create                       Fragments.create
 GET     /fragments/{id}                         Fragments.show
 POST    /fragments/{id}                         Fragments.destroy
 
+# Tags
+GET     /tags/{id}                              Tags.show
+
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 

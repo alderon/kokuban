@@ -57,8 +57,6 @@ object Fragment extends Magic[Fragment] {
         "xml"               -> "XML/XSLT"
     )
     
-    
-
     /**
      * Create a new Fragment.
      *
@@ -96,12 +94,18 @@ object Fragment extends Magic[Fragment] {
         )
     }
     
+    val sqlQueryBase = 
+        """
+        SELECT f.*, t.* FROM Fragment f
+        LEFT OUTER JOIN FragmentTag ft ON ft.fragment_id=f.id
+        LEFT OUTER JOIN Tag t ON t.id = ft.tag_id
+        """
+    
+    
     def findWithTags(fragmentId: Long):Fragment = {
         val fragment~tags = SQL(
+            sqlQueryBase +
             """
-            SELECT f.*, t.* FROM Fragment f
-            LEFT OUTER JOIN FragmentTag ft ON ft.fragment_id=f.id
-            LEFT OUTER JOIN Tag t ON t.id = ft.tag_id
             WHERE f.id = {id}
             """
         )
@@ -114,12 +118,30 @@ object Fragment extends Magic[Fragment] {
     
     def findAllWithTags():List[Fragment] = {
         var fragmentsAndTags:List[(Fragment,List[Tag])] = SQL(
+            sqlQueryBase
+        )
+        .as( Fragment ~< Fragment.span(Tag*) ^^ flatten * )
+        
+        fragmentsAndTags.map { arg => 
+            arg._1.tags = arg._2
+            arg._1
+        }
+    }
+
+    // This query is ready for optimization.
+    def findAllWithTagsByTagId(tagId:Long):List[Fragment] = {
+        var fragmentsAndTags:List[(Fragment,List[Tag])] = SQL(
+            sqlQueryBase +
             """
-            SELECT f.*, t.* FROM Fragment f
-            LEFT OUTER JOIN FragmentTag ft ON ft.fragment_id=f.id
-            LEFT OUTER JOIN Tag t ON t.id = ft.tag_id
+            WHERE f.id IN (
+              SELECT f.id FROM Fragment f
+              LEFT OUTER JOIN FragmentTag ft ON ft.fragment_id=f.id
+              LEFT OUTER JOIN Tag t ON t.id = ft.tag_id
+              WHERE t.id={id}
+            )
             """
         )
+        .on("id" -> tagId)
         .as( Fragment ~< Fragment.span(Tag*) ^^ flatten * )
         
         fragmentsAndTags.map { arg => 

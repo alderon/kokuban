@@ -105,4 +105,4 @@ Useful links found:
   * http://www.artima.com/scalazine/articles/steps.html
   * http://www.codecommit.com/blog/scala/scala-for-java-refugees-part-3
   * http://www.scala-lang.org/docu/files/ScalaByExample.pdf
-
+  * http://www.codecommit.com/blog/scala/scala-collections-for-the-easily-bored-part-2

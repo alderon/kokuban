@@ -163,6 +163,9 @@ span.tag {
     color: #ffffff;
     font-weight: bold;
     padding: 4px 8px;
+    
+    background: -moz-linear-gradient(0% 50% 90deg, #492580, #8845f0);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#8845f0), to(#492580));
 }
 span.tag a {
     color: #ffffff;

@@ -111,5 +111,21 @@ object Fragment extends Magic[Fragment] {
         fragment.tags = tags
         fragment
     }
+    
+    def findAllWithTags():List[Fragment] = {
+        var fragmentsAndTags:List[(Fragment,List[Tag])] = SQL(
+            """
+            SELECT f.*, t.* FROM Fragment f
+            LEFT OUTER JOIN FragmentTag ft ON ft.fragment_id=f.id
+            LEFT OUTER JOIN Tag t ON t.id = ft.tag_id
+            """
+        )
+        .as( Fragment ~< Fragment.span(Tag*) ^^ flatten * )
+        
+        fragmentsAndTags.map { arg => 
+            arg._1.tags = arg._2
+            arg._1
+        }
+    }
 
 }

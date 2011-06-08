@@ -62,6 +62,7 @@ class BasicTests extends UnitFlatSpec with ShouldMatchers with BeforeAndAfterEac
     }
     
     it should "create link between Fragments and Tags" in {
+        // Create one tag with two tags:
         var fragment = Fragment.create(Fragment("A fragment", "int i=0;", "java")).get
         var tag1 = models.Tag.create(models.Tag("dsl")).get
         var tag2 = models.Tag.create(models.Tag("weird")).get
@@ -71,8 +72,10 @@ class BasicTests extends UnitFlatSpec with ShouldMatchers with BeforeAndAfterEac
         
         Fragment.linkTags(fragment)
         
+        // Retrieve the tag from the database:
         var fragmentWithTags = Fragment.findWithTags(fragment.id.get.get)
         
+        // Assertions:
         fragmentWithTags.tags.length should be (2)
         fragmentWithTags.tags.map(t => t.name) should contain ("dsl")
         fragmentWithTags.tags.map(t => t.name) should contain ("weird")
@@ -94,5 +97,37 @@ class BasicTests extends UnitFlatSpec with ShouldMatchers with BeforeAndAfterEac
         var tag = models.Tag.findOrCreate("performance")
         tag should not be (null)
         tag.id should not be (NotAssigned)
+    }
+    
+    it should "find multiple Fragments with linked Tags" in {
+        // Create two fragments with two tags each.
+        var fragment1 = Fragment.create(Fragment("A java fragment", "int i=0;", "java")).get
+        var fragment2 = Fragment.create(Fragment("A ruby fragment", "[1,2,3,4,5].collect { |n| n**n }", "ruby")).get
+    
+        var tag1 = models.Tag.create(models.Tag("basic")).get
+        var tag2 = models.Tag.create(models.Tag("handy")).get
+        var tag3 = models.Tag.create(models.Tag("math")).get
+        
+        fragment1.addTag(tag1)
+        fragment1.addTag(tag2)
+        Fragment.linkTags(fragment1);
+
+        fragment2.addTag(tag2)
+        fragment2.addTag(tag3)
+        Fragment.linkTags(fragment2);
+        
+        // Retrieve the saved fragments from the database.
+        var fragmentsWithTags = Fragment.findAllWithTags()
+        
+        // Assertions:
+        fragmentsWithTags.length should be (2)
+        
+        fragmentsWithTags.head.title should be ("A java fragment")
+        fragmentsWithTags.head.tags.map(t => t.name) should contain ("basic")
+        fragmentsWithTags.head.tags.map(t => t.name) should contain ("handy")
+        
+        fragmentsWithTags.last.title should be ("A ruby fragment")
+        fragmentsWithTags.last.tags.map(t => t.name) should contain ("handy")
+        fragmentsWithTags.last.tags.map(t => t.name) should contain ("math")
     }
 }

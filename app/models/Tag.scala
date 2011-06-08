@@ -21,4 +21,8 @@ object Tag extends Magic[Tag] {
             case head :: tail => head
         }
     }
+    
+    def all() = {
+        Tag.find().as(Tag *)
+    }
 }

@@ -1,0 +1,7 @@
+<div class="sidebar box">
+    #{list items:models.Tag.all(), as:'tag'}
+    <p>
+    <!-- 25 &times; --> #{tag tag:tag /}
+    </p>
+    #{/list}
+</div>

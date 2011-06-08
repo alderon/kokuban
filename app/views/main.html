@@ -44,7 +44,14 @@
                     </p>
                 #{/if}
 
-                #{doLayout /}
+                <div class="clearfix">
+                    <div class="left">
+                        #{doLayout /}
+                    </div>
+                    <div class="right">
+                        #{include '/shared/sidebar.html'/} 
+                    </div>
+                </div>
             </div>
         </div>
         

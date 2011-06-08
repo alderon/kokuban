@@ -74,6 +74,16 @@ div.content {
     padding: 10px;
 }
 
+div.content div.left {
+    width: 720px;
+    float: left;
+}
+
+div.content div.right {
+    width: 220px;
+    float: right;
+}
+
 h1 { 
     font-family: 'Artifika', arial, serif;
     font-weight: normal;
@@ -87,7 +97,7 @@ h1 a {
 
 /* ======================================================================== */
 
-div.index div.fragment {
+div.box {
     background-color: #ffffff;
     padding: 10px 20px;
     margin-bottom: 20px;
@@ -162,11 +172,41 @@ span.tag {
     background-color: #5b2ea0;
     color: #ffffff;
     font-weight: bold;
-    padding: 4px 8px;
+    padding: 3px 6px;
     
     background: -moz-linear-gradient(0% 50% 90deg, #492580, #8845f0);
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#8845f0), to(#492580));
 }
 span.tag a {
     color: #ffffff;
+}
+
+/* ======================================================================== */
+
+div.sidebar {
+    margin-left: 20px;
+    text-align: right;
+}
+
+/* ======================================================================== */
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+html[xmlns] .clearfix {
+    display: block;
+}
+
+* html .clearfix {
+    height: 1%;
 }

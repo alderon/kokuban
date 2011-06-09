@@ -9,9 +9,9 @@
     #{/list}
 </p>
 
-<pre class="brush: ${fragment.style}">
-${fragment.body}
-</pre>
+<div class="code rounded">
+    <pre class="brush: ${fragment.style}; toolbar: false;">${fragment.body}</pre>
+</div>
 
 <form method="post" action="@{Fragments.destroy(fragment.id)}">
     <input type="submit" value="&{'fragment.delete'}" id="deleteFragment" />

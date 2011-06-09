@@ -9,7 +9,7 @@
     assertNotTitle('Application error')
     
     // Click the "add fragment" link to see the form
-    clickAndWait('link=add a fragment')
+    clickAndWait('link=share code')
     assertTextPresent('&{'fragment.header.share'}')
     
     // Check verification
@@ -20,6 +20,7 @@
     type('title', 'title for Java')
     type('content', 'int x=0;')
     select('style','Java')
+    type('tags', 'something')
     clickAndWait('shareFragment')
     assertTextNotPresent('&{'fields.all.required'}')
     assertTextPresent('title for Java')

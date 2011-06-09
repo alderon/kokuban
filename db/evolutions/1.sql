@@ -1,4 +1,5 @@
 # Fragments schema
+# Of course, this type of fulltext search is MySQL specific.
  
 # --- !Ups
  

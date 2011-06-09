@@ -90,6 +90,14 @@ To quote the Play Scala manual on the subject:
 **Choice made**: Let's use Anorm since it's recommended, and the more "Scala"
 thing to do.
 
+### Full text search ###
+
+Full text search is not natively supported by Play-Scala, unless JPA/Hibernate
+is used as ORM, in which case Hibernate-search can be used. Since this project
+uses Anorm, database fulltext search is more logical option.
+
+**Choice made**: Database fulltext search.
+
 ## LINKS ##
 
 Useful links found:

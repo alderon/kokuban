@@ -21,24 +21,24 @@ class BasicTests extends UnitFlatSpec with ShouldMatchers with BeforeAndAfterEac
                 System.out.println("bar");
             }
         }"""
-
+        
         Fragment.create(Fragment("A piece of Java code", body, "java"))
         Fragment.count().single() should be (1)
-
+        
         val fragment = Fragment.find("style={style}").on("style" -> "java").first()
-
+        
         fragment should not be (None)
         fragment.get.title should be ("A piece of Java code")
         fragment.get.body should be (body)
         fragment.get.style should be ("java")
     }
-
+    
     /**
      * Roel's note: It seems that validations on Anorm 'Magic' models are
      * not honored.
      */
     it should "not create a Fragment without a title" in (pending)
-
+    
     it should "only accept the given code styles" in {
         // as found in example code:
         val error = evaluating {
@@ -50,7 +50,7 @@ class BasicTests extends UnitFlatSpec with ShouldMatchers with BeforeAndAfterEac
             Fragment.create(Fragment("Spam title", "Spammy content", "spam"))
         }
     }
-
+    
     it should "create and retrieve a Tag" in {
         models.Tag.create(models.Tag("dsl"))
         models.Tag.count().single() should be (1)
@@ -73,8 +73,20 @@ class BasicTests extends UnitFlatSpec with ShouldMatchers with BeforeAndAfterEac
         fragmentWithTags.tags.map(t => t.name) should contain ("dsl")
         fragmentWithTags.tags.map(t => t.name) should contain ("weird")
     }
-
-    it should "load Fragments without tags" in {
+    
+    it should "not create unique tags" in {
+        // Create one tag with two tags:
+        val fragment = Fragment.create(Fragment("A fragment", "int i=0;", "java"), List("basic", "basic", "basic", "basic")).get
+        
+        // Retrieve the tag from the database:
+        val fragmentWithTags = Fragment.findWithTags(fragment.id.get.get)
+        
+        // Assertions:
+        fragmentWithTags.tags.length should be (1)
+        fragmentWithTags.tags.map(t => t.name) should contain ("basic")
+    }
+    
+    it should "load Fragments without Tags" in {
         val fragment = Fragment.create(Fragment("A fragment", "int i=0;", "java")).get
         val fragmentWithTags = Fragment.findWithTags(fragment.id.get.get)
         fragmentWithTags.tags.length should be (0)
@@ -110,11 +122,11 @@ class BasicTests extends UnitFlatSpec with ShouldMatchers with BeforeAndAfterEac
         fragmentsWithTags.last.tags.map(t => t.name) should contain ("handy")
         fragmentsWithTags.last.tags.map(t => t.name) should contain ("math")
     }
- 
+    
     it should "find fragments by tag id" in {
         // Create two fragments with two tags each.
         createTwoFragmentsWithTwoTags();
- 
+        
         // Retrieve the saved fragments by tag id.
         val overlappingTag = models.Tag.findOrCreate("handy")
         val fragments = Fragment.findAllWithTagsByTagId(overlappingTag.id.get.get);
@@ -125,7 +137,7 @@ class BasicTests extends UnitFlatSpec with ShouldMatchers with BeforeAndAfterEac
     it should "count tags by usage" in {
         // Create two fragments with two tags each.
         createTwoFragmentsWithTwoTags();
-
+        
         // Retrieve tags and counts.
         val tagCounts = models.Tag.allByCount()
         val overlappingTag = models.Tag.findOrCreate("handy")
@@ -149,11 +161,11 @@ class BasicTests extends UnitFlatSpec with ShouldMatchers with BeforeAndAfterEac
         
         val searchResultsPencils = Fragment.search("pencils")
         searchResultsPencils.length should be (2)
-
+        
         val searchResultsShimmering = Fragment.search("shimmering")
         searchResultsShimmering.length should be (1)
     }
- 
+    
     private def createTwoFragmentsWithTwoTags() = {
         Fragment.create(Fragment("A java fragment", "int i=0;", "java"), List("basic", "handy")).get
         Fragment.create(Fragment("A ruby fragment", "[1,2,3,4,5].collect { |n| n**n }", "ruby"), List("handy", "math")).get

@@ -64,7 +64,8 @@ object Fragment extends Magic[Fragment] {
     def create(fragment:Fragment, tags:List[String]):MayErr[IntegrityConstraintViolation,Fragment] = {
         var dbFragment = super.create(fragment)
 
-        val tagModels = tags.map(name => Tag.findOrCreate(name))
+        val tagModels = tags.map(name => Tag.findOrCreate(name)).distinct
+        println(tagModels)
         dbFragment.get.tags = tagModels
         Fragment.linkTags(dbFragment.get)
         

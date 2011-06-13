@@ -9,7 +9,12 @@ case class Tag(
     id: Pk[Long], 
     name: String,
     created_at: Date
-)
+) {
+    override def equals(that: Any) = that match {
+        case other: Tag => other.name equals name
+        case _ => false
+    }
+}
 
 object Tag extends Magic[Tag] {
     def apply(name: String) = {

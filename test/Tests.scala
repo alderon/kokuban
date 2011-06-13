@@ -63,14 +63,7 @@ class BasicTests extends UnitFlatSpec with ShouldMatchers with BeforeAndAfterEac
     
     it should "create link between Fragments and Tags" in {
         // Create one tag with two tags:
-        val fragment = Fragment.create(Fragment("A fragment", "int i=0;", "java")).get
-        val tag1 = models.Tag.create(models.Tag("dsl")).get
-        val tag2 = models.Tag.create(models.Tag("weird")).get
-        
-        fragment.addTag(tag1)
-        fragment.addTag(tag2)
-        
-        Fragment.linkTags(fragment)
+        val fragment = Fragment.create(Fragment("A fragment", "int i=0;", "java"), List("dsl", "weird")).get
         
         // Retrieve the tag from the database:
         val fragmentWithTags = Fragment.findWithTags(fragment.id.get.get)
@@ -147,12 +140,12 @@ class BasicTests extends UnitFlatSpec with ShouldMatchers with BeforeAndAfterEac
     
     it should "have functioning full text search" in {
         // content from randomtext.com
-        Fragment.create(Fragment("write about light orange reading libraries", " scratch soft mice;", "java"))
-        Fragment.create(Fragment("drink to brilliant white coasters", "destroy wise old hanging baskets", "java"))
-        Fragment.create(Fragment("sit on sticky pen tops", "scratch shimmering Christmas hampers", "java"))
-        Fragment.create(Fragment("look at smelly pen tops", "call prominent pencils", "java"))
-        Fragment.create(Fragment("tidy proud reading libraries", "be amazed at web sites", "java"))
-        Fragment.create(Fragment("eat wise old cameras", "scratch soft pencils", "java"))
+        Fragment.create(Fragment("write about light orange reading libraries", " scratch soft mice;", "java"), List("foo", "bar"))
+        Fragment.create(Fragment("drink to brilliant white coasters", "destroy wise old hanging baskets", "java"), List("bar", "baz"))
+        Fragment.create(Fragment("sit on sticky pen tops", "scratch shimmering Christmas hampers", "java"), List("baz", "qux"))
+        Fragment.create(Fragment("look at smelly pen tops", "call prominent pencils", "java"), List("qux", "quux"))
+        Fragment.create(Fragment("tidy proud reading libraries", "be amazed at web sites", "java"), List("quux", "corge"))
+        Fragment.create(Fragment("eat wise old cameras", "scratch soft pencils", "java"), List("corge", "gault"))
         
         val searchResultsPencils = Fragment.search("pencils")
         searchResultsPencils.length should be (2)
@@ -162,19 +155,7 @@ class BasicTests extends UnitFlatSpec with ShouldMatchers with BeforeAndAfterEac
     }
  
     private def createTwoFragmentsWithTwoTags() = {
-        val fragment1 = Fragment.create(Fragment("A java fragment", "int i=0;", "java")).get
-        val fragment2 = Fragment.create(Fragment("A ruby fragment", "[1,2,3,4,5].collect { |n| n**n }", "ruby")).get
-    
-        val tag1 = models.Tag.create(models.Tag("basic")).get
-        val tag2 = models.Tag.create(models.Tag("handy")).get
-        val tag3 = models.Tag.create(models.Tag("math")).get
-        
-        fragment1.addTag(tag1)
-        fragment1.addTag(tag2)
-        Fragment.linkTags(fragment1);
-
-        fragment2.addTag(tag2)
-        fragment2.addTag(tag3)
-        Fragment.linkTags(fragment2);
+        Fragment.create(Fragment("A java fragment", "int i=0;", "java"), List("basic", "handy")).get
+        Fragment.create(Fragment("A ruby fragment", "[1,2,3,4,5].collect { |n| n**n }", "ruby"), List("handy", "math")).get
     }
 }

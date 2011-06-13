@@ -3,6 +3,7 @@ package models
 import play.db.anorm._
 import play.db.anorm.SqlParser._
 import play.data.validation.Annotations._
+import play.utils.Scala._
 import scala.collection.SortedMap
 import defaults._
 
@@ -56,6 +57,19 @@ object Fragment extends Magic[Fragment] {
         "vb"                -> "Visual Basic",
         "xml"               -> "XML/XSLT"
     )
+    
+    /**
+     * Also responsible for creating and linking any tags.
+     */
+    def create(fragment:Fragment, tags:List[String]):MayErr[IntegrityConstraintViolation,Fragment] = {
+        var dbFragment = super.create(fragment)
+
+        val tagModels = tags.map(name => Tag.findOrCreate(name))
+        dbFragment.get.tags = tagModels
+        Fragment.linkTags(dbFragment.get)
+        
+        dbFragment
+    }
     
     /**
      * Create a new Fragment.

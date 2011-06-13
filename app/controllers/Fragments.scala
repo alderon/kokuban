@@ -29,13 +29,7 @@ object Fragments extends Controller {
             flash += "error" -> Messages.get("fields.all.required")
             new_
         } else {
-            val fragment = Fragment.create(Fragment(title, content, style)).get
-
-            // Assign and save tags:
-            val tagModels = tags.split(' ').toList.map(name => Tag.findOrCreate(name))
-            fragment.tags = tagModels
-            Fragment.linkTags(fragment)
-            
+            Fragment.create(Fragment(title, content, style), tags.split(' ').toList)
             Redirect("/fragments")
         }
     }

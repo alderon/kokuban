@@ -1,18 +1,19 @@
 # You can specialize this file for each language.
 # For example, for French create a messages.fr file
-#
+
 navigation.home=home
 navigation.add=share code
 
-fragment.share=Share
+fragment.share=Share code fragment
 fragment.delete=Delete
 fragment.header.share=Share a code fragment
+fragment.header.intro=Add the code below, give it a title, select the code style and add some useful tags.
 fragment.deleted=Fragment deleted.
+fragment.style.select=Select code style
 
-fragment.fields.title=Title
-fragment.fields.content=Content
-fragment.fields.type=Type
-fragment.fields.tags=Tags
+fragment.title.example=Code fragment title
+fragment.content.example=Code fragment
+fragment.tags.example=Add some tags
 
 fields.all.required=All fields are required.
 

@@ -184,21 +184,33 @@ input, textarea, select {
     font-size: 0.9em;
     -moz-border-radius: 3px;
     border-radius: 3px;
+    border: 1px solid #ccc;
 }
 input[type=text] {
-    border: 1px solid #000000;
-    width: 400px;
     padding: 5px;
 }
 textarea {
-    border: 1px solid #000000;
-    width: 400px;
     height: 400px;
     padding: 5px;
     resize: none;
 }
 select {
-    border: 1px solid #000000;
+    padding: 4px;
+}
+
+input.title, textarea.content {
+    width: 665px;
+}
+input.tags {
+    width: 500px;
+    margin-left: 12px;
+}
+
+input.unfilled, textarea.unfilled {
+    color: #cccccc;
+}
+input.filled, textarea.filled {
+    color: #000000;
 }
 
 span.tag {
@@ -222,14 +234,21 @@ div.sidebar {
 }
 
 div.search {
+    margin-top: 15px;
     padding: 10px;
 }
-div.sidebar input.search {
+div.search input.search {
     width: 165px;
     border: 1px solid #aaa;
     text-align: right;
     background: -moz-linear-gradient(0% 50% 90deg, #d7d7d7, #e7f7f7);
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e7f7f7), to(#d7d7d7));
+}
+div.search input.unfilled {
+    color: #7f7f7f;
+}
+div.search input.filled {
+    color: #000000;
 }
 
 /* ======================================================================== */

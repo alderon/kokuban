@@ -2,34 +2,30 @@
 #{set title:'Kokuban 黒板 - add code fragment' /}
 
 <h1>&{'fragment.header.share'}</h1>
-<form action="@{Fragments.create()}" method="POST">
+<p>&{'fragment.header.intro'}</p>
+<div class="box">
+<form action="@{Fragments.create()}" method="post" class="fragment">
 
     <p>
-        <label for="title">&{'fragment.fields.title'}:</label>
-        <input type="text" name="title" id="title" value="${params.title}" />
+        <input type="text" name="title" id="title" class="title ${params.title ? 'filled' : 'unfilled'}" value="${params.title ?: play.i18n.Messages.get('fragment.title.example')}" />
     </p>
     
     <p>
-        <label for="content">&{'fragment.fields.content'}:</label>
-        <textarea name="content" id="content">${params.content}</textarea>
+        <textarea name="content" id="content" class="content ${params.content ? 'filled' : 'unfilled'}">${params.content ?: play.i18n.Messages.get('fragment.content.example')}</textarea>
     </p>
     
     <p>
-        <label for="style">&{'fragment.fields.type'}:</label>
-        #{select 'style', id:'type'}
+        #{select 'style', id:'type', class:'style'}
+            #{option}&{'fragment.style.select'}#{/option}
             #{list items:styles, as:'style', value:params.style}
             #{option style._1}${style._2}#{/option}
             #{/list}
         #{/select}
-    </p>
-    
-    <p>
-        <label for="tags">&{'fragment.fields.tags'}:</label>
-        <input type="text" name="tags" id="tags" value="${params.tags}" />
+        <input type="text" name="tags" id="tags" class="tags ${params.tags ? 'filled' : 'unfilled'}" value="${params.tags ?: play.i18n.Messages.get('fragment.tags.example')}" />
     </p>
     
     <p>
         <input type="submit" id="shareFragment" value="&{'fragment.share'}" />
     </p>
 </form>
-
+</div>

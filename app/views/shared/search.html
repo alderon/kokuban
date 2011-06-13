@@ -1,5 +1,5 @@
 <div class="sidebar box search">
     <form method="get" action="/">
-        <input type="text" name="search" class="search" value="${params.search ?: ''}" />
+        <input type="text" name="search" class="search ${params.search ? 'filled' : 'unfilled'}" value="${params.search ?: 'search code'}" />
     </form>
 </div>

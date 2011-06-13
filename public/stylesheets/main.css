@@ -191,6 +191,17 @@ div.sidebar {
     text-align: right;
 }
 
+div.search {
+    padding: 10px;
+}
+div.sidebar input.search {
+    width: 165px;
+    border: 1px solid #aaa;
+    text-align: right;
+    background: -moz-linear-gradient(0% 50% 90deg, #d7d7d7, #e7f7f7);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e7f7f7), to(#d7d7d7));
+}
+
 /* ======================================================================== */
 
 .clearfix:after {

@@ -145,8 +145,8 @@ class BasicTests extends UnitFlatSpec with ShouldMatchers with BeforeAndAfterEac
         tagCounts.find(count => count._1.id == singleTag2.id).get._2 should be (1)
     }
     
-    it should "have functioning full text seach" in {
-        // content from randomtext.txt
+    it should "have functioning full text search" in {
+        // content from randomtext.com
         Fragment.create(Fragment("write about light orange reading libraries", " scratch soft mice;", "java"))
         Fragment.create(Fragment("drink to brilliant white coasters", "destroy wise old hanging baskets", "java"))
         Fragment.create(Fragment("sit on sticky pen tops", "scratch shimmering Christmas hampers", "java"))
@@ -154,9 +154,11 @@ class BasicTests extends UnitFlatSpec with ShouldMatchers with BeforeAndAfterEac
         Fragment.create(Fragment("tidy proud reading libraries", "be amazed at web sites", "java"))
         Fragment.create(Fragment("eat wise old cameras", "scratch soft pencils", "java"))
         
-        val searchResults = Fragment.search("pencils")
-        
-        println(searchResults)
+        val searchResultsPencils = Fragment.search("pencils")
+        searchResultsPencils.length should be (2)
+
+        val searchResultsShimmering = Fragment.search("shimmering")
+        searchResultsShimmering.length should be (1)
     }
  
     private def createTwoFragmentsWithTwoTags() = {

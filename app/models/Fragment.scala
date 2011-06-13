@@ -156,16 +156,20 @@ object Fragment extends Magic[Fragment] {
      * weight of zero. This has advantages on large datasets, but can make 
      * testing difficult on small ones."
      */
-    def search(term:String):List[Fragment~Long] = {
-        SQL(
+    def search(term:String):List[Fragment] = {
+        var fragmentsAndTags = SQL(
+            sqlQueryBase +
             """
-                SELECT f.*, CAST( (MATCH (f.title, f.body) AGAINST({term}) * 1000) AS SIGNED INTEGER) as score
-                FROM Fragment f
                 WHERE MATCH (f.title, f.body) AGAINST({term})
             """
         )
         .on("term" -> term)
-        .as( Fragment ~< long("score") * )
+        .as( Fragment ~< Fragment.span(Tag*) ^^ flatten * )
+        
+        fragmentsAndTags.map { arg => 
+            arg._1.tags = arg._2
+            arg._1
+        }
     }
 
 }

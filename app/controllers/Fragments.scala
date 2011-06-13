@@ -12,7 +12,15 @@ import java.util.{Date}
 
 object Fragments extends Controller {
     
-    def index = Template('fragments -> Fragment.findAllWithTags())
+    def index(search: String = "") = {
+        var fragments = search.trim match {
+            case "" => Fragment.findAllWithTags()
+            case term:String => Fragment.search(term.trim)
+            case _ => Fragment.findAllWithTags()
+        }
+        
+        Template('fragments -> fragments)
+    }
 
     def new_ = Template("Fragments/new.html", 'styles -> Fragment.STYLES)
     

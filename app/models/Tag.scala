@@ -10,7 +10,7 @@ case class Tag(
     name: String,
     created_at: Date
 ) {
-    override def equals(that: Any) = that match {
+    override def equals(that: Any):Boolean = that match {
         case other: Tag => other.name equals name
         case _ => false
     }

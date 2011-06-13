@@ -33,6 +33,12 @@ div.header div.logo {
     float: left;
 }
 
+div.header div.logo a span {
+    display: inline-block;
+    height: 116px;
+    width: 214px;
+}
+
 div.header div.navigation {
     color: #ffffff;
 }
@@ -61,8 +67,32 @@ div.header div.navigation a {
 div.footer {
     height: 232px;
     background-color: #000000;
+    color: #f3f3f3;
 }
 
+div.footer a {
+    color: #f3f3f3;
+    font-weight: normal;
+}
+
+div.footer div.container {
+    padding-top: 10px;
+}
+
+div.footer div.column {
+    float: left;
+    width: 240px;
+}
+
+div.footer div.column h3 {
+    margin: 0;
+    color: #c7c7c7;
+}
+
+div.footer div.column ul {
+    list-style: none;    
+    padding: 0;
+}
 /* ======================================================================== */
 
 div.container {

@@ -3,6 +3,9 @@
 Kokuban (黒板) is an online code-sharing tool implemented using the Play Scala
 Framework.
 
+* 黒 = Black
+* 板 = Board
+
 ## FUNCTIONALITY ##
 
 Goals:
